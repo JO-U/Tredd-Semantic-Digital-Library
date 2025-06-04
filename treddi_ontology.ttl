@@ -1,0 +1,217 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dcmitype: <http://purl.org/dc/dcmitype/> .
+@prefix cidoc-crm: <http://www.cidoc-crm.org/cidoc-crm/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <https://schema.org/> .
+
+
+# Classes                               
+
+dcmitype:PhysicalObject a rdfs:Class ;
+    rdfs:label "Physical Object" ;
+    rdfs:comment "An instance of a physical inanimate object" .
+
+cidoc-crm:E73_Information_Object a rdfs:Class ;
+    rdfs:label "Information Object" ;
+    rdfs:comment "Identifiable immaterial item that have an objectively recognizable structure and are documented as single units" .
+
+cidoc-crm:E7_Activity a rdfs:Class ;
+    rdfs:label "Activity" ;
+    rdfs:comment "Actions that result in changes of state in the cultural, social, or physical systems documented" .
+
+cidoc-crm:E55_Type a rdfs:Class ;
+    rdfs:label "Type" ;
+    rdfs:comment "Concepts denoted by terms from thesauri and controlled vocabularies used to characterize and classify resources" .
+
+dc:Agent a rdfs:Class ;
+    rdfs:label "Agent" ;
+    rdfs:comment "A resource that acts or has the power to act" .
+
+dcmitype:Collection a rdfs:Class ;
+    rdfs:label "Collection" ;
+    rdfs:comment "An aggregation of resources" .
+
+dcterms:Location a rdfs:Class ;
+    rdfs:label "Location" ;
+    rdfs:comment "A spatial region or named place" .
+
+cidoc-crm:E54_Dimension a rdfs:Class ;
+    rdfs:label "Dimension" ;
+    rdfs:comment "Quantifiable properties that can be measured" .
+
+cidoc-crm:E57_Material a rdfs:Class ;
+    rdfs:label "Material" ;
+    rdfs:comment "Properties of matter before its use, during its use, and as incorporated in an object" .
+
+dcterms:FileFormat a rdfs:Class ;
+    rdfs:label "File Format" ;
+    rdfs:comment "A digital resource format" .
+
+dcterms:LicenseDocument a rdfs:Class ;
+    rdfs:label "License Document" ;
+    rdfs:comment "A legal document giving official permission to do something with a resource" .
+
+cidoc-crm:E78_Curated_Holding a rdfs:Class ;
+    rdfs:label "Curated Holding" ;
+    rdfs:comment "Aggregations of assets that are assembled and maintained over time for a specific purpose and audience" .
+
+dcterms:SizeOrDuration a rdfs:Class ;
+    rdfs:label "Size or Duration" ;
+    rdfs:comment "A dimension or extent" .
+
+dcmitype:Software a rdfs:Class ;
+    rdfs:label "Software" ;
+    rdfs:comment "A computer program in source or compiled form" .
+
+
+
+# Properties 
+
+dc:title a rdf:Property ;
+    rdfs:label "Title" ;
+    rdfs:comment "A given name to a resource" ;
+    rdfs:domain dcmitype:PhysicalObject , cidoc-crm:E73_Information_Object ;
+    rdfs:range rdfs:Literal .
+
+dcterms:identifier a rdf:Property ;
+    rdfs:label "Identifier" ;
+    rdfs:comment "An unambiguous reference to the resource within a given context" ;
+    rdfs:domain dcmitype:PhysicalObject , cidoc-crm:E73_Information_Object ;
+    rdfs:range xsd:anyURI .
+
+dcterms:description a rdf:Property ;
+    rdfs:label "Description" ;
+    rdfs:comment "Provides a description of a resource or activity" ;
+    rdfs:domain dcmitype:PhysicalObject , cidoc-crm:E73_Information_Object , cidoc-crm:E7_Activity ;
+    rdfs:range rdfs:Literal .
+
+dcterms:creator a rdf:Property ;
+    rdfs:label "Creator" ;
+    rdfs:comment "Identifies the person or institution that created a resource" ;
+    rdfs:domain dcmitype:PhysicalObject , cidoc-crm:E73_Information_Object ;
+    rdfs:range dc:Agent .
+
+dcterms:created a rdf:Property ;
+    rdfs:label "Date Created" ;
+    rdfs:comment "Date of creation of the resource" ;
+    rdfs:domain dcmitype:PhysicalObject , cidoc-crm:E73_Information_Object ;
+    rdfs:range xsd:gDate .
+
+dcterms:issued a rdf:Property ;
+    rdfs:label "Date Issued" ;
+    rdfs:comment "Date of formal issuance" ;
+    rdfs:domain cidoc-crm:E73_Information_Object ;
+    rdfs:range xsd:gDate .
+
+dcterms:spatial a rdf:Property ;
+    rdfs:label "Spatial Coverage" ;
+    rdfs:comment "Spatial coverage of the resource" ;
+    rdfs:domain dcmitype:PhysicalObject ;
+    rdfs:range dcterms:Location .
+
+dcterms:isPartOf a rdf:Property ;
+    rdfs:label "Is Part Of" ;
+    rdfs:comment "Resource is part of another" ;
+    rdfs:domain dcmitype:PhysicalObject , cidoc-crm:E73_Information_Object ;
+    rdfs:range dcmitype:Collection .
+
+cidoc-crm:P43_has_dimension a rdf:Property ;
+    rdfs:label "Has Dimension" ;
+    rdfs:comment "Records the result of a measurement" ;
+    rdfs:domain dcmitype:PhysicalObject ;
+    rdfs:range cidoc-crm:E54_Dimension .
+
+cidoc-crm:P45_consists_of a rdf:Property ;
+    rdfs:label "Consists Of" ;
+    rdfs:comment "Material of which an object is composed" ;
+    rdfs:domain dcmitype:PhysicalObject ;
+    rdfs:range cidoc-crm:E57_Material .
+
+dc:subject a rdf:Property ;
+    rdfs:label "Subject" ;
+    rdfs:comment "Topic of the resource" ;
+    rdfs:domain dcmitype:PhysicalObject , cidoc-crm:E73_Information_Object ;
+    rdfs:range xsd:anyURI .
+
+dcterms:format a rdf:Property ;
+    rdfs:label "Format" ;
+    rdfs:comment "File format of the 3D model" ;
+    rdfs:domain cidoc-crm:E73_Information_Object ;
+    rdfs:range dcterms:FileFormat .
+
+dcterms:license a rdf:Property ;
+    rdfs:label "License" ;
+    rdfs:comment "Legal document for usage rights" ;
+    rdfs:domain cidoc-crm:E73_Information_Object ;
+    rdfs:range dcterms:LicenseDocument .
+
+dcterms:rightsHolder a rdf:Property ;
+    rdfs:label "Rights Holder" ;
+    rdfs:comment "Entity owning rights over the resource" ;
+    rdfs:domain dcmitype:PhysicalObject , cidoc-crm:E73_Information_Object ;
+    rdfs:range cidoc-crm:E78_Curated_Holding .
+
+dcterms:extent a rdf:Property ;
+    rdfs:label "Extent" ;
+    rdfs:comment "Size or duration of a resource" ;
+    rdfs:domain cidoc-crm:E73_Information_Object ;
+    rdfs:range dcterms:SizeOrDuration .
+
+dcterms:relation a rdf:Property ;
+    rdfs:label "Relation" ;
+    rdfs:comment "Related resource" ;
+    rdfs:domain dcmitype:PhysicalObject , cidoc-crm:E73_Information_Object .
+
+prov:wasDerivedFrom a rdf:Property ;
+    rdfs:label "Was Derived From" ;
+    rdfs:comment "Indicates provenance" ;
+    rdfs:domain cidoc-crm:E73_Information_Object ;
+    rdfs:range dcmitype:PhysicalObject .
+
+cidoc-crm:P108i_was_produced_by a rdf:Property ;
+    rdfs:label "Was Produced By" ;
+    rdfs:comment "Result of an activity" ;
+    rdfs:domain cidoc-crm:E73_Information_Object ;
+    rdfs:range cidoc-crm:E7_Activity .
+
+dcterms:type a rdf:Property ;
+    rdfs:label "Type" ;
+    rdfs:comment "Identifies type of a resource or activity" ;
+    rdfs:domain cidoc-crm:E7_Activity ;
+    rdfs:range cidoc-crm:E55_Type .
+
+cidoc-crm:P20_had_specific_purpose a rdf:Property ;
+    rdfs:label "Had Specific Purpose" ;
+    rdfs:comment "Purpose of the activity" ;
+    rdfs:domain cidoc-crm:E7_Activity ;
+    rdfs:range cidoc-crm:E55_Type .
+
+cidoc-crm:P14_carried_out_by a rdf:Property ;
+    rdfs:label "Carried Out By" ;
+    rdfs:comment "Agent who performed the activity" ;
+    rdfs:domain cidoc-crm:E7_Activity ;
+    rdfs:range dc:Agent .
+
+schema:startDate a rdf:Property ;
+    rdfs:label "Start Date" ;
+    rdfs:comment "When the activity started" ;
+    rdfs:domain cidoc-crm:E7_Activity ;
+    rdfs:range xsd:gDate .
+
+schema:endDate a rdf:Property ;
+    rdfs:label "End Date" ;
+    rdfs:comment "When the activity ended" ;
+    rdfs:domain cidoc-crm:E7_Activity ;
+    rdfs:range xsd:gDate .
+
+cidoc-crm:P188_requires_production_tool a rdf:Property ;
+    rdfs:label "Requires Production Tool" ;
+    rdfs:comment "Tool needed to perform the activity" ;
+    rdfs:domain cidoc-crm:E55_Type ;
+    rdfs:range dcmitype:PhysicalObject, dcmitype:Software .
+
